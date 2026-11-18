@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% include "_head.html" %}
+<title>Sign in · Sakshya</title>
+</head>
+<body class="auth">
+<main class="auth-wrap">
+  <section class="auth-side">
+    <div class="brand"><b>Sakshya</b><span>साक्ष्य · CONTROL EVIDENCE FOR RBI-REGULATED PSOs</span></div>
+    <h1>Evidence your system auditor can rely on.</h1>
+    <p>Twenty ¶38 control areas, the six-hour ¶22(d) filing clock and the ¶5 vendor flow-down, kept in one hashed, tamper-evident record.</p>
+    <ul class="auth-points">
+      <li><span class="para">¶36–41</span> Design and operating evidence per control area, with the auditor's reliance recorded</li>
+      <li><span class="para">¶37</span> Auditor independence checked against your services ledger</li>
+      <li><span class="para">¶22(d)</span> RBI and CERT-In drafts assembled inside the six-hour window</li>
+    </ul>
+  </section>
+  <section class="auth-card">
+    <h2>Sign in</h2>
+    {% if error %}<div class="callout bad">{{ error }}</div>{% endif %}
+    <form method="post" class="auth-form" autocomplete="on">
+      <input type="hidden" name="csrf" value="{{ csrf_token() }}">
+      <div class="fld"><label class="f" for="email">Work email</label><input class="in" id="email" name="email" type="email" value="{{ email }}" required autofocus></div>
+      <div class="fld"><label class="f" for="password">Password</label><input class="in" id="password" name="password" type="password" required></div>
+      <button class="btn primary wide" type="submit">Sign in</button>
+    </form>
+    {% if allow_signup %}<p class="small muted">New to Sakshya? <a href="{{ url_for('auth.signup') }}">Create a workspace</a></p>{% endif %}
+    {% if demo %}
+    <div class="demo-box">
+      <div class="eyebrow">Shared demo workspace · fictional data</div>
+      <p class="small">Password for every demo account: <code>{{ demo.password }}</code></p>
+      <div class="demo-users">
+        {% for email, name, role in demo.users %}
+        <form method="post">
+          <input type="hidden" name="csrf" value="{{ csrf_token() }}">
+          <input type="hidden" name="email" value="{{ email }}">
+          <input type="hidden" name="password" value="{{ demo.password }}">
+          <button class="demo-user" type="submit"><span class="chip">{{ role }}</span><span>{{ name }}</span><span class="mono muted">{{ email }}</span></button>
+        </form>
+        {% endfor %}
+      </div>
+    </div>
+    {% endif %}
+  </section>
+</main>
+</body>
+</html>

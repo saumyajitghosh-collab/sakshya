@@ -1,0 +1,35 @@
+# Render Blueprint: one web service and one Postgres database.
+databases:
+  - name: sakshya-db
+    plan: basic-256mb
+    region: singapore
+    databaseName: sakshya
+    user: sakshya
+
+services:
+  - type: web
+    name: sakshya
+    runtime: python
+    plan: starter
+    region: singapore
+    buildCommand: pip install -r requirements.txt
+    preDeployCommand: flask --app wsgi init-db
+    startCommand: gunicorn wsgi:app --workers 2 --threads 4 --timeout 90 --bind 0.0.0.0:$PORT
+    healthCheckPath: /healthz
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: sakshya-db
+          property: connectionString
+      - key: SECRET_KEY
+        generateValue: true
+      - key: DEMO_MODE
+        value: "1"
+      - key: ALLOW_SIGNUP
+        value: "1"
+      - key: DEMO_PASSWORD
+        value: sakshya-demo
+      - key: APP_TZ
+        value: Asia/Kolkata
+      - key: ANTHROPIC_API_KEY
+        sync: false

@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% include "_head.html" %}
+<meta name="csrf" content="{{ csrf_token() }}">
+<title>Sakshya Evidence Desk</title>
+</head>
+<body>
+<div class="app">
+  <aside class="rail" aria-label="Modules">
+    <div class="brand"><b>Sakshya</b><span>साक्ष्य · CONTROL EVIDENCE FOR RBI-REGULATED PSOs</span></div>
+    <div class="tenant" id="tenant"></div>
+    <nav id="nav"></nav>
+    <div class="rail-foot" id="railfoot"></div>
+    <form method="post" action="{{ url_for('auth.logout') }}" class="signout">
+      <input type="hidden" name="csrf" value="{{ csrf_token() }}">
+      <div id="me"></div>
+      <button type="submit">Sign out</button>
+    </form>
+  </aside>
+  <main class="main" id="main"><div class="wrap"><div class="empty">Loading your workspace…</div></div></main>
+</div>
+<div id="dlg-root"></div>
+<div id="toast-root"></div>
+<script src="{{ url_for('static', filename='app.js') }}"></script>
+</body>
+</html>

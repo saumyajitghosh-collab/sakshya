@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+{% include "_head.html" %}
+<title>Create a workspace · Sakshya</title>
+</head>
+<body class="auth">
+<main class="auth-wrap">
+  <section class="auth-side">
+    <div class="brand"><b>Sakshya</b><span>साक्ष्य · CONTROL EVIDENCE FOR RBI-REGULATED PSOs</span></div>
+    <h1>Set up your evidence workspace.</h1>
+    <p>Your workspace starts with all twenty control areas from ¶38 of the 5 November 2026 Master Directions. You become its administrator and can invite your compliance team, your system auditor and Board members.</p>
+  </section>
+  <section class="auth-card">
+    <h2>Create a workspace</h2>
+    {% if error %}<div class="callout bad">{{ error }}</div>{% endif %}
+    <form method="post" class="auth-form">
+      <input type="hidden" name="csrf" value="{{ csrf_token() }}">
+      <div class="fld"><label class="f" for="org">Payment system operator</label><input class="in" id="org" name="org" value="{{ form.get('org','') }}" required></div>
+      <div class="fld"><label class="f" for="business">What you operate</label><input class="in" id="business" name="business" placeholder="e.g. PPI issuer, payment aggregator" value="{{ form.get('business','') }}"></div>
+      <div class="fgrid">
+        <div class="fld"><label class="f" for="segment">PSO category (¶3)</label>
+          <select class="in" id="segment" name="segment">
+            {% for v, l in [('large','Large'),('medium','Medium'),('small','Small')] %}<option value="{{ v }}" {% if form.get('segment','medium')==v %}selected{% endif %}>{{ l }}</option>{% endfor %}
+          </select></div>
+        <div class="fld"><label class="f" for="fy_type">Financial year</label>
+          <select class="in" id="fy_type" name="fy_type">
+            <option value="apr" {% if form.get('fy_type','apr')=='apr' %}selected{% endif %}>Apr–Mar · file by 1 Jun</option>
+            <option value="cal" {% if form.get('fy_type')=='cal' %}selected{% endif %}>Jan–Dec · file by 1 Mar</option>
+          </select></div>
+      </div>
+      <div class="fld"><label class="f" for="name">Your name</label><input class="in" id="name" name="name" value="{{ form.get('name','') }}" required></div>
+      <div class="fld"><label class="f" for="email">Work email</label><input class="in" id="email" name="email" type="email" value="{{ form.get('email','') }}" required></div>
+      <div class="fld"><label class="f" for="password">Password (10 characters or more)</label><input class="in" id="password" name="password" type="password" minlength="10" required></div>
+      <label class="check"><input type="checkbox" name="sample" value="1" {% if form.get('sample') %}checked{% endif %}> Fill the workspace with fictional sample data to explore first</label>
+      <button class="btn primary wide" type="submit">Create workspace</button>
+    </form>
+    <p class="small muted">Already have an account? <a href="{{ url_for('auth.login') }}">Sign in</a></p>
+  </section>
+</main>
+</body>
+</html>
