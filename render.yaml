@@ -26,7 +26,7 @@ services:
       - key: DEMO_MODE
         value: "1"
       - key: ALLOW_SIGNUP
-        value: "1"
+        value: "0"  # prospects use the demo logins; set to "1" to open self-serve trials
       - key: DEMO_PASSWORD
         value: sakshya-demo
       - key: APP_TZ
