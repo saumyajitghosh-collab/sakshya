@@ -123,7 +123,7 @@ def login():
     if current_app.config["DEMO_MODE"]:
         demo = {"password": current_app.config["DEMO_PASSWORD"], "users": DEMO_USERS}
     return render_template("login.html", error=error, email=email, demo=demo,
-                           allow_signup=current_app.config["ALLOW_SIGNUP"])
+                           allow_signup=current_app.config["ALLOW_SIGNUP"], pay_url=current_app.config.get("PAYMENT_URL"))
 
 
 @bp.route("/signup", methods=["GET", "POST"])

@@ -518,6 +518,7 @@ function vTeam(){
 function vPricing(){
   var p=S.pricing,x=roi();
   var h='<div class="ph"><div><div class="eyebrow">Priced against the audit, not the transaction</div><h1>Pricing and ROI</h1><p class="lede">Every number below reads as a discount to audit hours and compliance headcount. Change any assumption to match the prospect; the figures recalculate and are saved to this workspace.</p></div></div>';
+  if(S.payUrl)h+='<div class="callout">Ready to buy? Pay the amount on your quote through Razorpay: <a href="'+esc(S.payUrl)+'" target="_blank" rel="noopener">'+esc(S.payUrl.replace(/^https?:\/\//,''))+'</a>. It opens in a new tab.</div>';
   h+='<section class="tiers">'+tier('Small PSO','₹2.4 lakh','per year, flat','Audit Room and Board Pack for small PPI issuers and instant money transfer operators; live from 1 Apr 2028.',['Referral channel through empanelled auditors','Resale only by a firm that does not audit that client (¶37)','Self-serve onboarding'],false)+
     tier('Medium PSO',lakh(x.price),'per year at the current assumptions','The full package for MTSS operators and medium PPI issuers, timed to their first SAR under the consolidated scope.',['All 20 ¶38 control areas','Six-Hour Desk with RBI and CERT-In drafts','Vendor Flow-down for '+x.crit+' critical vendors'],true)+
     tier('Large PSO','From ₹45 lakh','per year','Card networks, payment aggregators, white-label ATM operators and large PPI issuers absorbing audit observations now.',['Per-control-area and per-vendor pricing','SIEM and ITSM evidence connectors','Auditor access with reliance recorded'],false)+
@@ -538,7 +539,7 @@ function vPricing(){
   ].map(function(r){return '<tr><td class="mono">¶'+r[0]+'</td><td class="small">'+r[1]+'</td><td>'+r[2]+'</td><td>'+chip(r[3],r[4])+'</td></tr>';}).join('')+'</tbody></table></div></section>';
   return h;
 }
-function tier(n,p,u,d,li,hl){return '<div class="tier'+(hl?' hl':'')+'"><div class="eyebrow">'+esc(n)+'</div><div class="pr">'+esc(p)+'</div><div class="small muted">'+esc(u)+'</div><p class="small" style="margin:0">'+esc(d)+'</p><ul>'+li.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul></div>';}
+function tier(n,p,u,d,li,hl){return '<div class="tier'+(hl?' hl':'')+'"><div class="eyebrow">'+esc(n)+'</div><div class="pr">'+esc(p)+'</div><div class="small muted">'+esc(u)+'</div><p class="small" style="margin:0">'+esc(d)+'</p><ul>'+li.map(function(x){return '<li>'+esc(x)+'</li>';}).join('')+'</ul>'+(S.payUrl?'<a class="btn'+(hl?' primary':'')+'" href="'+esc(S.payUrl)+'" target="_blank" rel="noopener">Pay online</a>':'')+'</div>';}
 function roiOut(){
   var x=roi(),mx=Math.max(x.price,x.save,1);
   return '<div class="card-h"><h2>Annual effect for this prospect</h2></div><div class="split2"><div class="stat"><div class="v">'+lakh(x.save)+'</div><div class="l">Cost removed per year</div></div><div class="stat"><div class="v" style="color:var(--'+(x.net>=0?'good':'bad')+')">'+(x.net>=0?'':'−')+lakh(Math.abs(x.net))+'</div><div class="l">Net of the subscription · payback '+(x.payback?x.payback.toFixed(1)+' months':'n/a')+'</div></div></div>'+

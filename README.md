@@ -59,6 +59,7 @@ if you want Claude to draft incident descriptions.
 | `STORAGE_DIR` | – | Store files on a mounted disk instead of Postgres |
 | `MAX_UPLOAD_MB` | `25` | Upload size limit |
 | `APP_TZ` | `Asia/Kolkata` | Time zone for financial-year and period boundaries |
+| `PAYMENT_URL` | – | Payment link shown on the pricing tiers and sign-in page (Razorpay in `render.yaml`) |
 
 `flask --app wsgi reset-demo` rebuilds the demo workspace.
 

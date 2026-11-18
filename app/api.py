@@ -105,6 +105,7 @@ def state():
         "v": 1, "entity": t.name, "business": t.business or "", "segment": t.segment, "fyType": t.fy_type,
         "contact": t.contact or "", "phone": t.phone or "", "isDemo": t.is_demo,
         "ai": bool(current_app.config.get("ANTHROPIC_API_KEY")),
+        "payUrl": current_app.config.get("PAYMENT_URL") or None,
         "me": {"name": g.user.name, "email": g.user.email, "role": g.user.role},
         "areas": areas,
         "obs": [{"id": o.ref, "area": o.area_key, "title": o.title, "sev": o.severity, "raised": o.raised,

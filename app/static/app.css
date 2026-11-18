@@ -231,3 +231,6 @@ body.auth{min-height:100%;background:var(--paper)}
 .demo-user .chip{grid-row:span 2;justify-self:start}
 .demo-user .mono{font-size:11px}
 @media (max-width:860px){.auth-wrap{grid-template-columns:1fr}.auth-side{padding:28px 20px}.auth-side h1{font-size:32px}.auth-card{padding:28px 20px;border-left:0}}
+
+.tier .btn{justify-content:center;justify-self:start;margin-top:4px}
+.auth-side .pay-link{color:#fff}

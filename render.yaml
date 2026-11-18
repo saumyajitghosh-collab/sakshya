@@ -31,5 +31,7 @@ services:
         value: sakshya-demo
       - key: APP_TZ
         value: Asia/Kolkata
+      - key: PAYMENT_URL
+        value: https://razorpay.me/@saumyajitghosh8959
       - key: ANTHROPIC_API_KEY
         sync: false

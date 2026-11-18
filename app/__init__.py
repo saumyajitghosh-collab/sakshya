@@ -38,6 +38,7 @@ def create_app(test_config=None):
         ANTHROPIC_API_KEY=os.environ.get("ANTHROPIC_API_KEY") or None,
         ANTHROPIC_MODEL=os.environ.get("ANTHROPIC_MODEL", "claude-sonnet-5-5"),
         APP_TZ=os.environ.get("APP_TZ", "Asia/Kolkata"),
+        PAYMENT_URL=os.environ.get("PAYMENT_URL", ""),
     )
     if test_config:
         app.config.update(test_config)
