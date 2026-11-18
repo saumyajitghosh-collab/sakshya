@@ -2,6 +2,7 @@
 databases:
   - name: sakshya-db
     plan: basic-256mb
+    diskSizeGB: 5  # can be increased later, never decreased
     region: singapore
     databaseName: sakshya
     user: sakshya
